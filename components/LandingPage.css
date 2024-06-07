@@ -1,0 +1,37 @@
+.landingpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #F8F8F2; /* Off-White */
+}
+
+.video-container {
+  margin-bottom: 20px;
+}
+
+.demo-video {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signup-container {
+  margin-top: 20px;
+}
+
+.signup-button {
+  background-color: #FFD700; /* Warm Yellow */
+  color: #333333; /* Dark Gray */
+  border: none;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background-color: #FFA500; /* Darker Yellow */
+}
