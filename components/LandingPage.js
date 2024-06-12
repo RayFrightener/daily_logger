@@ -19,7 +19,7 @@ function LandingPage() {
     <div className="landingpage">
       <div className="video-container">
         <video controls className="demo-video">
-          <source src="%PUBLIC_URL%/path_to_demo_video.mp4" type="video/mp4" />
+          <source src="path_to_demo_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
