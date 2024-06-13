@@ -1,0 +1,8 @@
+.log-container {
+  display: flex;
+  flex-direction: column;
+  width: 30%; /* adjust as needed */
+  height: 100vh; /* adjust as needed */
+  overflow-y: auto; /* for scrolling if content exceeds the height */
+  /* add other styles as needed */
+}

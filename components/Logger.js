@@ -29,7 +29,6 @@ const Logger = ({ goals, onLog }) => {
           <input type="time" value={times[index]} onChange={handleTimeChange(index)} placeholder="Time"/>
           <button type="submit">Log</button>
         </form>
-        
       ))}
     </div>
   );
