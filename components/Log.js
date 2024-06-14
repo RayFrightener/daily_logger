@@ -19,4 +19,4 @@ const Log = () => {
   );
 };
 
-export default log;
+export default Log;

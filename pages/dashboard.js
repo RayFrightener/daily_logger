@@ -1,8 +1,7 @@
 // pages/DashboardPage.js
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import GoalsForm from './GoalsForm';
-import Logger from './Logger';
+import OnBoarding from '../components/OnBoarding';
 
 
 const DashboardPage = () => {
@@ -11,8 +10,7 @@ const DashboardPage = () => {
   return (
     <div>
       <Header />
-      <GoalsForm onSetGoals={setGoals} />
-      <Logger goals={goals} />
+      <OnBoarding />
     </div>
   );
 };
