@@ -10,6 +10,18 @@ const OnBoarding = () => {
   const [step, setStep] = useState(0);
   const [goals, setGoals] = useState([]);
   const [isReturningUser, setIsReturningUser] = useState(false);
+  const containerStyle = {
+    width: '80%', // Adjust this to control the width of the Logger component
+    height: '80%', // Adjust this to control the height of the Logger component
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute', // This will position the Logger component absolutely
+    left: '50%', // This will center the Logger component horizontally
+    top: '50%', // This will center the Logger component vertically
+    transform: 'translate(-50%, -50%)', // This will ensure the Logger component is centered
+    overflowY: 'scroll', // This will add a scrollbar if the content overflows
+  };
 
   useEffect(() => {
     // Check if the user is returning or new here
@@ -40,11 +52,11 @@ const OnBoarding = () => {
 
   switch (step) {
     case 0:
-      return <WelcomeUser onContinue={handleContinue} />;
+      return <div style={containerStyle}><WelcomeUser onContinue={handleContinue} /></div>;
     case 1:
-      return <GoalsForm onSetGoals={handleSetGoals} />;
+      return <div style={containerStyle}><GoalsForm onSetGoals={handleSetGoals} /></div>;
     case 2:
-      return <Logger goals={goals} />;
+      return <div style={containerStyle}><Logger goals={goals} /></div>;
     default:
       return null;
   }
