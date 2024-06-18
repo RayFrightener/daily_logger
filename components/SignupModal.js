@@ -50,6 +50,7 @@ const SignupModal = ({ isOpen, onClose }) => {
             <button type="submit">Sign Up</button>
           </form>
           <button type="button" className="btn" id="googleSignup" onClick={handleGoogleSignUp}>Sign Up with Google</button>
+          
           <button type="button" onClick={() => setIsReturningUser(true)}>Already have an account? Log in</button>
         </div>
       )}

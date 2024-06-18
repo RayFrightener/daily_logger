@@ -24,7 +24,7 @@ function LandingPage() {
         </video>
       </div>
       <div className="signup-container">
-        <button className="signup-button" onClick={openModal}>Sign Up!</button>
+        <button className="signup-button" onClick={openModal}>Sign Up or Sign in</button>
       </div>
       <SignupModal isOpen={isModalOpen} onClose={closeModal} />
     </div>

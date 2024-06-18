@@ -5,13 +5,15 @@ import Logger from "./Logger";
 import ReturningUser from "./ReturningUser";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../utils/firebase';
+import { useRouter } from 'next/router';
 
 const OnBoarding = () => {
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [goals, setGoals] = useState([]);
   const [isReturningUser, setIsReturningUser] = useState(false);
   const containerStyle = {
-    width: '80%', // Adjust this to control the width of the Logger component
+    width: '40%', // Adjust this to control the width of the Logger component
     height: '80%', // Adjust this to control the height of the Logger component
     display: 'flex',
     justifyContent: 'center',
@@ -20,7 +22,6 @@ const OnBoarding = () => {
     left: '50%', // This will center the Logger component horizontally
     top: '50%', // This will center the Logger component vertically
     transform: 'translate(-50%, -50%)', // This will ensure the Logger component is centered
-    overflowY: 'scroll', // This will add a scrollbar if the content overflows
   };
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const OnBoarding = () => {
 
   const handleSetGoals = (newGoals) => {
     setGoals(newGoals);
-    setStep(step + 1);
+    router.push('/dashboard');
   };
 
   switch (step) {
@@ -55,8 +56,6 @@ const OnBoarding = () => {
       return <div style={containerStyle}><WelcomeUser onContinue={handleContinue} /></div>;
     case 1:
       return <div style={containerStyle}><GoalsForm onSetGoals={handleSetGoals} /></div>;
-    case 2:
-      return <div style={containerStyle}><Logger goals={goals} /></div>;
     default:
       return null;
   }
