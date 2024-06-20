@@ -7,7 +7,6 @@ and, unless redefined with <meta> tags, in social media cards. */
 
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import OnBoarding from '../components/OnBoarding';
 import Head from 'next/head';
 
 
@@ -20,7 +19,6 @@ const DashboardPage = () => {
         <title>Dashboard</title>
       </Head>
       <Header />
-      <OnBoarding />
     </div>
   );
 };

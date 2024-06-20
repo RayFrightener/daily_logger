@@ -20,8 +20,6 @@ const Header = () => {
       <div className="signout-button-container">
         <SignOutButton />
       </div>
-      <h1>Welcome to your Dashboard</h1>
-      <p>This is the main logging area.</p>
     </div>
   );
 };

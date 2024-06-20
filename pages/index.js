@@ -1,4 +1,3 @@
-
 // pages/index.js
 import React from 'react';
 import LandingPage from '../components/LandingPage';

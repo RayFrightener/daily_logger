@@ -1,7 +1,7 @@
 // Logger.js
 import React, { useState } from 'react';
 
-const Logger = ({ goals, onLog }) => {
+const Logger = ({ goals = [], onLog }) => {
   const [activities, setActivities] = useState(Array(goals.length).fill(''));
   const [times, setTimes] = useState(Array(goals.length).fill(''));
 
