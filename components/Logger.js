@@ -1,35 +1,34 @@
-// Logger.js
 import React, { useState } from 'react';
 
-const Logger = ({ goals = [], onLog }) => {
-  const [activities, setActivities] = useState(Array(goals.length).fill(''));
-  const [times, setTimes] = useState(Array(goals.length).fill(''));
+const Logger = () => {
+  // State hooks for each input
+  const [date, setDate] = useState(new Date());
+  const [tag, setTag] = useState('');
+  const [task, setTask] = useState('');
+  const [time, setTime] = useState('');
 
-  const handleSubmit = (index) => (event) => {
-    event.preventDefault();
-    onLog({ goal: goals[index], activity: activities[index], time: times[index] });
-    setActivities(prev => { const copy = [...prev]; copy[index] = ''; return copy; });
-    setTimes(prev => { const copy = [...prev]; copy[index] = ''; return copy; });
-  };
-
-  const handleActivityChange = (index) => (event) => {
-    setActivities(prev => { const copy = [...prev]; copy[index] = event.target.value; return copy; });
-  };
-
-  const handleTimeChange = (index) => (event) => {
-    setTimes(prev => { const copy = [...prev]; copy[index] = event.target.value; return copy; });
+  // Function to handle adding a task (simplified for demonstration)
+  const addTask = () => {
+    console.log({ date, tag, task, time });
+    // Here you would typically update a state or send data to a server
   };
 
   return (
     <div>
-      {goals.map((goal, index) => (
-        <form key={goal} onSubmit={handleSubmit(index)}>
-          <label>{goal}</label>
-          <input type="text" value={activities[index]} onChange={handleActivityChange(index)} placeholder="Activity"/>
-          <input type="time" value={times[index]} onChange={handleTimeChange(index)} placeholder="Time"/>
-          <button type="submit">Log</button>
-        </form>
-      ))}
+      {/* Date Picker */}
+      <input type="date" value={date.toISOString().substring(0, 10)} onChange={(e) => setDate(new Date(e.target.value))} />
+      {/* Tag Selection */}
+      <select value={tag} onChange={(e) => setTag(e.target.value)}>
+        <option value="Health">Health</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+      </select>
+      {/* Task Input */}
+      <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
+      {/* Time Input */}
+      <input type="number" value={time} onChange={(e) => setTime(e.target.value)} />
+      {/* Add Task Button */}
+      <button onClick={addTask}>Add Task</button>
     </div>
   );
 };

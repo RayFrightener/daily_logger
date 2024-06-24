@@ -8,6 +8,9 @@ and, unless redefined with <meta> tags, in social media cards. */
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Head from 'next/head';
+import Logger from '../components/Logger';
+import LogView from '../components/LogView';
+import Visualiser from '../components/Visualiser';
 
 
 const DashboardPage = () => {
@@ -19,6 +22,11 @@ const DashboardPage = () => {
         <title>Dashboard</title>
       </Head>
       <Header />
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <LogView />
+      <Logger />
+      <Visualiser />
+    </div>
     </div>
   );
 };
