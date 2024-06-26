@@ -9,11 +9,11 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Head from 'next/head';
 import Logger from '../components/Logger';
-import LogView from '../components/LogView';
-import Visualiser from '../components/Visualiser';
+import Log from '../components/Log';
+import Visualizations from '../components/Visualizations';
 
 
-const DashboardPage = () => {
+const DashboardPage: React.FC = () => {
   const [goals, setGoals] = useState([]);
 
   return (
@@ -22,11 +22,17 @@ const DashboardPage = () => {
         <title>Dashboard</title>
       </Head>
       <Header />
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <LogView />
-      <Logger />
-      <Visualiser />
-    </div>
+      <div className="flex justify-around">
+        <div className="w-1/3 bg-gray-100 p-4 rounded">
+          <Log />
+        </div>
+        <div className="w-1/3 bg-gray-100 p-4 rounded">
+          <Logger />
+        </div>
+       <div className="w-1/3 bg-gray-100 p-4 rounded">
+          <Visualizations />
+        </div>    
+      </div>
     </div>
   );
 };

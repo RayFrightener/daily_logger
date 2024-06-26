@@ -5,10 +5,10 @@ There are two special non-standard kind of icons for Safari browser: apple-touch
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class myDocument extends Document {
-  render() {
+  render():JSX.Element {
     return (
       <Html lang="en-US">
-        <Head />
+        <Head>
         {//always include character set, title, and viewport settings in your head element.
         }
         <meta charSet="UTF-8" />
@@ -18,12 +18,13 @@ class myDocument extends Document {
         <link rel="mask-icon" href="/images/mlwicon.svg" color="#226DAA" /> 
         */}
         <title>The Daily Task Logger</title>
+        </Head >
         <body>
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 

@@ -2,6 +2,8 @@
 import React from 'react';
 import About from '../components/About';
 
-export default function AboutPage() {
-  return <About />;
+const AboutPage: React.FC = () => {
+return <About />;
 }
+
+export default AboutPage;

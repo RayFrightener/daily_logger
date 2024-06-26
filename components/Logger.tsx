@@ -19,9 +19,17 @@ const Logger = () => {
       <input type="date" value={date.toISOString().substring(0, 10)} onChange={(e) => setDate(new Date(e.target.value))} />
       {/* Tag Selection */}
       <select value={tag} onChange={(e) => setTag(e.target.value)}>
-        <option value="Health">Health</option>
+        <option value="Health & Fitness">Health & Fitness</option>
         <option value="Work">Work</option>
-        <option value="Personal">Personal</option>
+        <option value="Education & Learning">Education & Learning</option>
+        <option value="Skill Development">Personal</option>
+        <option value="Career & Productivity">Career & Productivity</option>
+        <option value="Personal Development">Personal Development</option>
+        <option value="Social & Relationships">Social & Relationships</option>
+        <option value="Hobbies & Leisure">Hobbies & Leisure</option>
+        <option value="Household & Errands">Household & Errands</option>
+        <option value="Financial Management">Financial Management</option>
+        <option value="Rest & Relaxation">Rest & Relaxation</option>
       </select>
       {/* Task Input */}
       <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
