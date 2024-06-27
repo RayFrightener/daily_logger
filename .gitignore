@@ -37,4 +37,3 @@ next-env.d.ts
 
 # firebase config
 /utils/firebase.ts
-/utils/firebase.js
