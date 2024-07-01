@@ -1,4 +1,4 @@
-//landingpage.js
+
 import React, { useState } from 'react';
 import  Link  from 'next/link';
 import SignupModal from './SignupModal';  // Make sure this path is correct
@@ -8,10 +8,12 @@ function LandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
+    console.log("Opening modal...");
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    console.log("Closing modal...");
     setIsModalOpen(false);
   };
 
