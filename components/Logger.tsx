@@ -14,11 +14,11 @@ const Logger = () => {
   };
 
   return (
-    <div>
+    <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md">
       {/* Date Picker */}
-      <input type="date" value={date.toISOString().substring(0, 10)} onChange={(e) => setDate(new Date(e.target.value))} />
+      <input type="date" className="block w-full p-2 border border-gray-300 rounded mt-2 bg-white" value={date.toISOString().substring(0, 10)} onChange={(e) => setDate(new Date(e.target.value))} />
       {/* Tag Selection */}
-      <select value={tag} onChange={(e) => setTag(e.target.value)}>
+      <select className="block w-full p-2 border border-gray-300 rounded mt-4 bg-white" value={tag} onChange={(e) => setTag(e.target.value)}>
         <option value="Health & Fitness">Health & Fitness</option>
         <option value="Work">Work</option>
         <option value="Education & Learning">Education & Learning</option>
@@ -32,11 +32,11 @@ const Logger = () => {
         <option value="Rest & Relaxation">Rest & Relaxation</option>
       </select>
       {/* Task Input */}
-      <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
+      <input type="text" className="block w-full p-2 border border-gray-300 rounded mt-4 bg-white" value={task} onChange={(e) => setTask(e.target.value)} />
       {/* Time Input */}
-      <input type="number" value={time} onChange={(e) => setTime(e.target.value)} />
+      <input type="number" className="block w-full p-2 border border-gray-300 rounded mt-4 bg-white" value={time} onChange={(e) => setTime(e.target.value)} />
       {/* Add Task Button */}
-      <button onClick={addTask}>Add Task</button>
+      <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mt-4" onClick={addTask}>Add Task</button>
     </div>
   );
 };
