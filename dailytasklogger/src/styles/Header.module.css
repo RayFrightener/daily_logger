@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #d7d4d4;
+  border-bottom: 1px solid #ddd;
+}
+
+.signInButton {
+  margin-left: auto; /* Push the button to the right */
+}

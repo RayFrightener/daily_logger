@@ -1,0 +1,19 @@
+.text {
+  padding: 20px;
+  font-size: 18px; /* Increase the base font size */
+}
+
+.text h2 {
+  margin-top: 20px;
+  font-size: 24px; /* Increase the font size for headings */
+}
+
+.text ul,
+.text ol {
+  margin-left: 20px;
+  font-size: 18px; /* Ensure list items have the same font size */
+}
+
+.text hr {
+  margin: 20px 0;
+}
