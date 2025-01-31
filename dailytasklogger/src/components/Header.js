@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../utils/supabase/client";
+import GoogleButton from './GoogleButton';
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
@@ -53,27 +54,7 @@ export default function Header() {
           Sign Out
         </button>
       ) : (
-        <>
-          <div
-            id="g_id_onload"
-            data-client_id="992190689462-ts8jtjd9m7r9fd3ofl38d6ibnn9vf0s2.apps.googleusercontent.com"
-            data-context="signin"
-            data-ux_mode="popup"
-            data-callback="handleCredentialResponse"
-            data-auto_select="true"
-            data-itp_support="true"
-            data-use_fedcm_for_prompt="true"
-          ></div>
-          <div
-            className="g_id_signin"
-            data-type="standard"
-            data-shape="pill"
-            data-theme="outline"
-            data-text="signin"
-            data-size="large"
-            data-logo_alignment="left"
-          ></div>
-        </>
+        <GoogleButton />
       )}
     </header>
   );
