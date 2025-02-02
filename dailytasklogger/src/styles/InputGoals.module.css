@@ -1,0 +1,61 @@
+.goalsForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .goalsForm h2 {
+    text-align: center;
+  }
+  
+  .goalsForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .goalsForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .goalsForm button:hover {
+    background-color: #0056b3;
+  }
+  
+  .goalsForm ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .goalsForm li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: #fff;
+  }
+  
+  .goalsForm li button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .goalsForm li button:hover {
+    background-color: #c82333;
+  }

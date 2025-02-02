@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../utils/supabase/client";
-
+import InputGoals from "@/components/InputGoals";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -24,6 +24,7 @@ export default function Home() {
     <div>
       <h1>Welcome to the Home Page</h1>
       {user &&  <p>Hello, {user.email}</p>}
+      <InputGoals />
     </div>
   );
 }
