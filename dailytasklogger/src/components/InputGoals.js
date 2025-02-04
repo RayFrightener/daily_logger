@@ -36,7 +36,7 @@ export default function InputGoals() {
       if (error) {
         console.error('Error fetching goals:', error);
       } else {
-        setGoals(data);
+        setGoals(data || []);
       }
     };
     fetchGoals();
@@ -50,7 +50,7 @@ export default function InputGoals() {
     if (error) {
       console.error('Error adding goal:', error);
     } else {
-      setGoals([...goals, ...data]); // Update the goals state with the new goal
+      setGoals([...(goals || []), ...data]); // Update the goals state with the new goal
       setGoal(''); // clear the input field after saving 
     }
   }
