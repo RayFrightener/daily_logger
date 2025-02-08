@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import supabase from "@/utils/supabase/client";
-import Styles from "@/styles/InputGoals.module.css";
+import Styles from "@/styles/GoalsList.module.css";
 
-export default function InputGoals({ refresh }) {
+export default function GoalsList({ refresh }) {
   // const [goal, setGoal] = useState('');
   const [goals, setGoals] = useState([]);
 
@@ -50,7 +50,6 @@ export default function InputGoals({ refresh }) {
 
   return (
     <div className={Styles.goalsForm}>
-      <h2>Input Goals</h2>
       {/* <input 
       type="text"
       value={goal}
@@ -62,8 +61,8 @@ export default function InputGoals({ refresh }) {
       <ul>
         {goals.map((goal) => (
           <li key={goal.id}>
-            {goal.name}
-            <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+            <span>{goal.name}</span>
+            <button onClick={() => deleteGoal(goal.id)}>×</button>
             </li>
         ))}
       </ul>

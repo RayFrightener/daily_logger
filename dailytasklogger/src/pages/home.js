@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../utils/supabase/client";
-import InputGoals from "@/components/InputGoals";
+import GoalsList from "@/components/GoalsList";
 import Styles from "@/styles/home.module.css";
 import AddGoalModal from "@/components/AddGoalmodel";
+// import Logger from "@/components/Logger"; // Placeholder for Logger component
+// import Chart from "@/components/Chart"; // Placeholder for Chart component
+// import DailySummary from "@/components/DailySummary"; // Placeholder for DailySummary component
+
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -37,11 +41,21 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
+    <div className={Styles.page}>
       {user &&  <p>Hello, {user.email}</p>}
-      <button onClick={() => setIsModalOpen(true)}>Add Goal</button>
-      <InputGoals refresh={refresh} />
+      <div className={Styles.section1}>
+        <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
+        <GoalsList refresh={refresh} />
+      </div>
+      <div className={Styles.section2}>
+        {/* <Chart /> */}
+      </div>
+      <div className={Styles.section3}>
+        {/* <DailySummary /> */}
+      </div>
+      <div className={Styles.section4}>
+        {/* <Logger /> */}
+      </div>
       <AddGoalModal
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}

@@ -7,7 +7,31 @@
   background-color: #d7d4d4;
   border-bottom: 1px solid #ddd;
 }
+.headerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.headerTitle {
+  flex: 1;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+}
 
 .signInButton {
   margin-left: auto; /* Push the button to the right */
+}
+
+.signOutButton {
+  background-color: #C7BEBE;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 14;
+  cursor: pointer;
+}
+.signOutButton:hover {
+  background-color: #9c9191; /* Optional: Change hover color if needed */
 }

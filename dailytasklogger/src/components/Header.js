@@ -49,13 +49,17 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      {user ? (
-        <button onClick={handleSignOut} className={styles.signInButton}>
+      <div className={styles.headerContent}>
+        {router.pathname === "/" && <h1 className={styles.headerTitle}>Welcome</h1>}
+        {router.pathname === "/home" && <h1 className={styles.headerTitle}>Home</h1>}
+        {user ? (
+        <button onClick={handleSignOut} className={styles.signOutButton}>
           Sign Out
         </button>
-      ) : (
+        ) : (
         <GoogleButton />
-      )}
+        )}
+      </div>
     </header>
   );
 }

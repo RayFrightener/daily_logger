@@ -1,0 +1,52 @@
+.goalsForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 5px;
+    /* border: 1px solid #ccc; */
+    border-radius: 14px;
+    background-color: #C7BEBE; 
+    min-width: 168px;
+    min-height: 199px;
+  }
+  
+  .goalsForm h2 {
+    text-align: center;
+  }
+  
+  
+  .goalsForm ul {
+    list-style-type: disc;
+    padding: 10px;
+  }
+  
+  .goalsForm li {
+    color: #000000;
+    display: flex;
+    justify-content: space-between; /* Distribute space between goal text and button */
+    align-items: center; /* Center content vertically */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    background-color: #DCD9D9;
+    text-align: center; /* Center text horizontally */
+  }
+  
+  .goalsForm li span {
+    flex: 1; /* Allow the span to take up remaining space */
+    text-align: center; /* Center text within the span */
+  }
+
+  .goalsForm li button {
+    background-color: transparent; /* Make button background transparent */
+    color: #000000; /* black color for the cross */
+    border: none;
+    font-size: 10px; /* Increase font size for the cross */
+    cursor: pointer;
+    opacity: 0.5; /* Make the button less prominent */
+    text-decoration: none; /* Remove any link styling */
+  }
+  
+  .goalsForm li button:hover {
+    opacity: 1; /* Make the button fully visible on hover */
+  }
