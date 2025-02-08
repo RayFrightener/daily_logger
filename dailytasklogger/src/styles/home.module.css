@@ -1,0 +1,9 @@
+/* filepath: /home/Atman/repos/daily_logger/dailytasklogger/src/styles/home.module.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #C7BEBE; /* Set background color for the entire page */
+}

@@ -1,61 +1,37 @@
-/**Input Goals Component
- * a simple form:
- * Heading
- * input box
- * save
-*/
-/**
- * psuedocode for the component
- * define react component
- * a form 
- * form: save button will send the input data to the db
- * data will be displayed as a list right below the form
- * with the hoverable button option to edit and and delete 
- * editing: goal should have a separate save button,
- */
-
-/**
- * Where do we want to stop right now?
- * input + save + display
- * in future 
- * edit + delete
- */
 import React, { useState, useEffect } from 'react';
 import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/InputGoals.module.css";
 
-export default function InputGoals() {
-  // start with form input
-  const [goal, setGoal] = useState('');
+export default function InputGoals({ refresh }) {
+  // const [goal, setGoal] = useState('');
   const [goals, setGoals] = useState([]);
 
-
-  useEffect(() => {
-    const fetchGoals = async () => {
-      const { data, error } = await supabase.from('goals').select('id, name');
-      if (error) {
-        console.error('Error fetching goals:', error);
-      } else {
-        // debug statement to see what data is being returned
-        console.log('Fetched goals:', data);
-        setGoals(data || []);
-      }
-    };
-    fetchGoals();
-  }, []);
-
-  const addGoal = async () => {
-    if (goal.trim() === '') return;
-
-    const { data, error } = await supabase.from('goals').insert([{ name: goal }]);
+  const fetchGoals = async () => {
+    const { data, error } = await supabase.from('goals').select('id, name');
     if (error) {
-      console.error('Error adding goal:', error);
-    } else if (data) {
-      console.log('Added goal:', data);
-      setGoals([...goals, ...data]);
-      setGoal('');
+      console.log('Error fetching goals:', error);
+    } else {
+      console.log('fetched goals:', data);
+      setGoals(data || []);
     }
   };
+
+  useEffect(() => {
+    fetchGoals();
+  }, [refresh]);
+
+  // const addGoal = async () => {
+  //   if (goal.trim() === '') return;
+
+  //   const { data, error } = await supabase.from('goals').insert([{ name: goal }]).select();
+  //   if (error) {
+  //     console.error('Error adding goal:', error);
+  //   } else if (data) {
+  //     console.log('Added goal:', data);
+  //     setGoals((prevGoals) => [...prevGoals, data[0]])
+  //     setGoal('');
+  //   }
+  // };
 
   const deleteGoal = async (id) => {
     const { error } = await supabase.from('goals').delete().eq('id', id);
@@ -66,16 +42,23 @@ export default function InputGoals() {
     }
   };
 
+  // const handleKeyPress = (e) => {
+  //   if (e.key === 'Enter') {
+  //     addGoal();
+  //   }
+  // };
+
   return (
     <div className={Styles.goalsForm}>
       <h2>Input Goals</h2>
-      <input 
+      {/* <input 
       type="text"
       value={goal}
       onChange={(e) => setGoal(e.target.value)}
+      onKeyDown={handleKeyPress}
       placeholder="Enter a goal"
-      />
-      <button onClick={addGoal}>Save</button>
+      /> */}
+      {/* <button onClick={addGoal}>Save</button> */}
       <ul>
         {goals.map((goal) => (
           <li key={goal.id}>
@@ -86,5 +69,4 @@ export default function InputGoals() {
       </ul>
     </div>
   )
-
 }
