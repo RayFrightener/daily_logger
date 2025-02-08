@@ -32,10 +32,12 @@ export default function InputGoals() {
 
   useEffect(() => {
     const fetchGoals = async () => {
-      const { data, error } = await supabase.from('goals').select('id','name');
+      const { data, error } = await supabase.from('goals').select('id, name');
       if (error) {
         console.error('Error fetching goals:', error);
       } else {
+        // debug statement to see what data is being returned
+        console.log('Fetched goals:', data);
         setGoals(data || []);
       }
     };
@@ -43,17 +45,17 @@ export default function InputGoals() {
   }, []);
 
   const addGoal = async () => {
-  // Check if goal is empty after trimming leading and trailing whitespace
     if (goal.trim() === '') return;
-  // Insert the goal into the 'name' column of the 'goals' table
-    const { data, error } = await supabase.from('goals').insert([{ name: goal}]);
+
+    const { data, error } = await supabase.from('goals').insert([{ name: goal }]);
     if (error) {
       console.error('Error adding goal:', error);
-    } else {
-      setGoals([...(goals || []), ...data]); // Update the goals state with the new goal
-      setGoal(''); // clear the input field after saving 
+    } else if (data) {
+      console.log('Added goal:', data);
+      setGoals([...goals, ...data]);
+      setGoal('');
     }
-  }
+  };
 
   const deleteGoal = async (id) => {
     const { error } = await supabase.from('goals').delete().eq('id', id);
@@ -75,12 +77,12 @@ export default function InputGoals() {
       />
       <button onClick={addGoal}>Save</button>
       <ul>
-        {goals.map((goal) => {
+        {goals.map((goal) => (
           <li key={goal.id}>
             {goal.name}
             <button onClick={() => deleteGoal(goal.id)}>Delete</button>
             </li>
-        })}
+        ))}
       </ul>
     </div>
   )
