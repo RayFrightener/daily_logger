@@ -1,0 +1,77 @@
+.logger {
+    background-color: #C7BEBE;
+    padding: 20px;
+    border-radius: 14px;
+    min-width: 470px;
+    min-height: 300px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logger h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: black;
+  }
+  
+  .logger select {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #DCD9D9;
+    font-size: 16px;
+    color: black; /* Placeholder color */
+  }
+  
+  .logger select option:not(:first-of-type) {
+    color: black; /* Options color */
+  }
+  
+  .logDuration {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #DCD9D9;
+    font-size: 16px;
+  }
+  
+  .logDuration::placeholder {
+    color: #6c757d; /* Change this to your desired placeholder color */
+  }
+  
+  .logDuration:focus {
+    border-color: #000000;
+    outline: none;
+  }
+  
+  .inputButtonContainer {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .loggerButton {
+    padding: 10px 20px;
+    background-color: #DCD9D9;
+    color: black;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-left: 10px; /* Add some space between the input and button */
+  }
+  
+  .loggerButton:hover {
+    background-color: #9c9191;
+  }

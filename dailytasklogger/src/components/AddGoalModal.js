@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Styles from "@/styles/AddGoalModal.module.css";
 
 
 export default function AddGoalModal({ isOpen, onClose, onSave }) {
     const [newGoal, setNewGoal] = useState('');
     const [message, setMessage] = useState('');
+    const inputRef = useRef(null);
 
+    useEffect(() => {
+        if (isOpen && inputRef.current) {
+            inputRef.current.focus();
+        }
+    },[isOpen]);
 
     const handleSave = () => {
         onSave(newGoal);
@@ -15,6 +21,12 @@ export default function AddGoalModal({ isOpen, onClose, onSave }) {
     };
 
     if (!isOpen) return null;
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+        handleSave();
+        }
+    };
 
     return (
         <div className={Styles.modalOverlay} onClick={onClose}>
@@ -27,6 +39,8 @@ export default function AddGoalModal({ isOpen, onClose, onSave }) {
                 value={newGoal}
                 onChange={(e) => setNewGoal(e.target.value)}
                 className={Styles.inputField}
+                onKeyDown={handleKeyPress}
+                ref={inputRef}
                 />
                 <div className={Styles.buttonMessageContainer}>
                 {message && <p className={Styles.message}>{message}</p>}

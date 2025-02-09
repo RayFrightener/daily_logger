@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import supabase from "../utils/supabase/client";
 import GoalsList from "@/components/GoalsList";
 import Styles from "@/styles/home.module.css";
-import AddGoalModal from "@/components/AddGoalmodel";
-// import Logger from "@/components/Logger"; // Placeholder for Logger component
+import AddGoalModal from "@/components/AddGoalModal";
+import Logger from "@/components/Logger"; // Placeholder for Logger component
 // import Chart from "@/components/Chart"; // Placeholder for Chart component
-// import DailySummary from "@/components/DailySummary"; // Placeholder for DailySummary component
+import LogSummary from "@/components/LogSummary"; // Placeholder for DailySummary component
 
 
 export default function Home() {
@@ -45,16 +45,16 @@ export default function Home() {
       {user &&  <p>Hello, {user.email}</p>}
       <div className={Styles.section1}>
         <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
-        <GoalsList refresh={refresh} />
+        <GoalsList refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <div className={Styles.section2}>
         {/* <Chart /> */}
       </div>
       <div className={Styles.section3}>
-        {/* <DailySummary /> */}
+        <LogSummary refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <div className={Styles.section4}>
-        {/* <Logger /> */}
+        <Logger refresh={refresh}/>
       </div>
       <AddGoalModal
       isOpen={isModalOpen}
