@@ -11,7 +11,7 @@ export default function AddGoalModal({ isOpen, onClose, onSave }) {
         onSave(newGoal);
         setNewGoal('');
         setMessage('Goal saved!');
-        setTimeout(() => setMessage(''), 2000);
+        setTimeout(() => setMessage(''), 1500);
     };
 
     if (!isOpen) return null;
@@ -20,15 +20,18 @@ export default function AddGoalModal({ isOpen, onClose, onSave }) {
         <div className={Styles.modalOverlay} onClick={onClose}>
             <div className={Styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={Styles.closeButton} onClick={onClose}>×</button>
-                <h2>Add New Goal</h2>
+                <h2>Define your goals</h2>
                 <input 
                 type="text"
-                placeholder="Enter new goal"
+                placeholder="Type in your goal"
                 value={newGoal}
                 onChange={(e) => setNewGoal(e.target.value)}
+                className={Styles.inputField}
                 />
-                <button className={Styles.saveButton} onClick={handleSave}>Save</button>
+                <div className={Styles.buttonMessageContainer}>
                 {message && <p className={Styles.message}>{message}</p>}
+                <button className={Styles.saveButton} onClick={handleSave}>Define</button>
+                </div>
             </div>
         </div>
     );

@@ -11,9 +11,13 @@
   }
   
   .modalContent {
-    background-color: white;
+    background-color: #C7BEBE;
+    width: 472px;
+    height: 160px;
+    text-align: center;
+    color: black;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 14px;
     position: relative;
     max-width: 400px;
     width: 100%;
@@ -25,7 +29,7 @@
     right: 10px;
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
   }
   
@@ -33,19 +37,43 @@
     display: block;
     margin-left: auto;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #DCD9D9;
+    color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 14px;
     cursor: pointer;
   }
   
   .saveButton:hover {
-    background-color: #0056b3;
+    background-color: #9c9191;
   }
-  
+
   .message {
     margin-top: 10px;
-    color: green;
+    margin-left: 60px;
+    color: black;
     text-align: center;
+    flex: 1; /* Allow the message to take up remaining space */
+  }
+
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #DCD9D9; /* Set background color */
+    font-size: 16px; /* Increase font size */
+  }
+
+  .inputField:focus {
+    border-color: #000000; /* Override the blue border color with black */
+    outline: none; /* Remove the default outline */
+  }
+
+  .buttonMessageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }

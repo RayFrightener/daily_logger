@@ -41,8 +41,8 @@ body {
   }
   
   .addGoalButton {
-    width: 141px;
-    height: 53px;
+    width: 100px;
+    height: 45px;
     padding: 10px 20px;
     background-color: #DCD9D9;
     color: #000000;
