@@ -2,23 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/Logger.module.css";
 
-// logger function that fetches goals in a dropdown list
-// has an input with a save button that inserts the selected goal, using
-// perhaps goal id or some best practice way with duration inside the input field
-// 
-/**
- * 
- *  CREATE TABLE logs (
-    id SERIAL PRIMARY KEY,
-    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE, -- Ensure user owns log
-    goal_id UUID REFERENCES goals(id) ON DELETE CASCADE, -- Links to a goal
-    duration FLOAT NOT NULL, -- Hours spent (e.g., 1.5 for 1 hour 30 min)
-    log_date DATE DEFAULT CURRENT_DATE, -- Auto-fills with today’s date
-    created_at TIMESTAMP DEFAULT NOW() -- Log entry timestamp
-);
- */
-
-export default function Logger( { refresh }) {
+export default function Logger( { refresh, setRefresh }) {
     const [log, setLog] = useState('');
     const [goals, setGoals] = useState([]);
     const [selectedGoal, setSelectedGoal] = useState('');
@@ -46,6 +30,7 @@ export default function Logger( { refresh }) {
         } else {
             console.log('Successfully logged', data);
             setLog(''); // clear the input field after saving the log
+            setRefresh(prev => !prev);
         }
     };
 

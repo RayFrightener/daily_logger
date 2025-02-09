@@ -3,32 +3,33 @@ import supabase from "@/utils/supabase/client";
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Styles from '@/styles/LogSummary.module.css';
 import EditLogModal from '@/components/EditLogModal';
-//**LogSummary.js
-// fetch goalname from goal id within logs table
-// alongside it display the duration for that goal during that day
-// at the bottom display total duration: xy hrs 
-// for example use goal_id from logs table to get the name
-// from goals table and display the goalname + the duration from
-// the logs table associated with that goal
-// have it be for the current day*/
 
 export default function LogSummary({ refresh, setRefresh }) {
     const [dailySummary, setDailySummary] = useState([]);
     const [isEditModalOpen, setIsEditModelOpen] = useState(false);
     const [selectedLog, setSelectedLog] = useState(null);
 
-    //use effect to fetch the logs
-
     useEffect(() => {
         const fetchDailySummary = async () => {
+            const todayDate = new Date().toISOString().split('T')[0];
+            console.log('Filtering logs for date:', todayDate);
+
             const { data, error } = await supabase
                 .from('logs')
-                .select('id, goal_id, duration, goals(name)') // Reference related table
-                .eq('log_date', new Date().toISOString().split('T')[0]);
-    
+                .select(`
+                    id,
+                    goal_id,
+                    duration,
+                    goals!inner (
+                        name
+                    )
+                `)
+                .eq('log_date', todayDate);
+
             if (error) {
                 console.log('Error fetching daily summary:', error);
             } else {
+                console.log('Fetched logs:', data);
                 setDailySummary(data || []);
             }
         };
@@ -51,8 +52,8 @@ export default function LogSummary({ refresh, setRefresh }) {
 
     return (
         <div className={Styles.dailySummmary}>
-            <h3>Log summary for the day</h3>
-            {dailySummary.map((log) => {
+            <h3>Today's Logs</h3>
+            {dailySummary.map((log) => (
                 <div key={log.id} className={Styles.logItem}>
                     <span>{log.goals.name}: {log.duration} hrs</span>
                     <button className={Styles.dailyLogButtons} onClick={() => openEditLogModal(log)}>
@@ -62,7 +63,7 @@ export default function LogSummary({ refresh, setRefresh }) {
                         <FaTrash />
                     </button>
                 </div>
-            })}
+            ))}
             <EditLogModal
             isOpen={isEditModalOpen}
             onClose={() => setIsEditModelOpen(false)}

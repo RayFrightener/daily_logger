@@ -14,7 +14,7 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
     }, [isOpen]);
 
     const handleUpdate = async () => {
-        const { error } = supabase
+        const { error } = await supabase
             .from('logs')
             .update({ duration: parseFloat(newDuration) })
             .eq('id', log.id);
@@ -22,6 +22,7 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
             console.log('Error updating log:', error);
         } else {
             setMessage('Log updated!');
+            setNewDuration('');
             setTimeout(() => {
                 setMessage('');
                 setRefresh(prev => !prev);
@@ -45,7 +46,7 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
                 <h2>Edit Log for {log.goals.name}</h2>
                 <input
                 type="text"
-                placeholder="Add new duration"
+                placeholder="Type in new duration for the goal"
                 value={newDuration}
                 onChange={(e) => setNewDuration(e.target.value)}
                 className={Styles.inputField}

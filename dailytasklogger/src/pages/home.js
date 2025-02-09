@@ -54,7 +54,7 @@ export default function Home() {
         <LogSummary refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <div className={Styles.section4}>
-        <Logger refresh={refresh}/>
+        <Logger refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <AddGoalModal
       isOpen={isModalOpen}
