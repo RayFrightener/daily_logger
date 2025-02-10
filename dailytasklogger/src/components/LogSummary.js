@@ -11,7 +11,7 @@ export default function LogSummary({ refresh, setRefresh }) {
 
     useEffect(() => {
         const fetchDailySummary = async () => {
-            const todayDate = new Date().toISOString().split('T')[0];
+            const todayDate = new Date().toLocaleDateString('en-CA'); //toISOString().split('T')[0]
             console.log('Filtering logs for date:', todayDate);
 
             const { data, error } = await supabase
@@ -51,7 +51,7 @@ export default function LogSummary({ refresh, setRefresh }) {
     }
 
     return (
-        <div className={Styles.dailySummmary}>
+        <div className={Styles.dailySummary}>
             <h3>Today's Logs</h3>
             {dailySummary.map((log) => (
                 <div key={log.id} className={Styles.logItem}>

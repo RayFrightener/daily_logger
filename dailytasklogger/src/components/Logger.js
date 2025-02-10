@@ -23,7 +23,8 @@ export default function Logger( { refresh, setRefresh }) {
     }, [refresh]);
 
     const saveLog = async () => {
-        const { data, error } = await supabase.from('logs').insert([{ goal_id: selectedGoal, duration: parseFloat(log) }]);
+        const todayDate = new Date().toLocaleDateString('en-CA');
+        const { data, error } = await supabase.from('logs').insert([{ goal_id: selectedGoal, duration: parseFloat(log), log_date: todayDate }]);
         if (error) {
             console.log('Error logging:', error);
             throw error;

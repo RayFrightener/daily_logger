@@ -43,10 +43,10 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
         <div className={Styles.modalOverlay} onClick={onClose}>
             <div className={Styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={Styles.closeButton} onClick={onClose}>×</button>
-                <h2>Edit Log for {log.goals.name}</h2>
+                <h2>Change duration of: {log.goals.name}</h2>
                 <input
                 type="text"
-                placeholder="Type in new duration for the goal"
+                placeholder="Type in new duration"
                 value={newDuration}
                 onChange={(e) => setNewDuration(e.target.value)}
                 className={Styles.inputField}
