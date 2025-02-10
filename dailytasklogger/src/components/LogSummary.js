@@ -52,7 +52,7 @@ export default function LogSummary({ refresh, setRefresh }) {
 
     return (
         <div className={Styles.dailySummary}>
-            <h3>Today's Logs</h3>
+            <h3>Logs summary</h3>
             {dailySummary.map((log) => (
                 <div key={log.id} className={Styles.logItem}>
                     <span>{log.goals.name}: {log.duration} hrs</span>

@@ -17,7 +17,7 @@ export default function AddGoalModal({ isOpen, onClose, onSave }) {
         onSave(newGoal);
         setNewGoal('');
         setMessage('Goal saved!');
-        setTimeout(() => setMessage(''), 1500);
+        setTimeout(() => setMessage(''), 2000);
     };
 
     if (!isOpen) return null;

@@ -61,7 +61,7 @@ export default function Logger( { refresh, setRefresh }) {
                 <div className={Styles.inputButtonContainer}>
                 <input
                 className={Styles.logDuration}
-                placeholder="Add duration (for e.g. 1.5 for 1.5 hrs)"
+                placeholder="Add duration (1.5 for 1.5 hrs)"
                 value={log}
                 onChange={(e) => setLog(e.target.value)}
                 onKeyDown={handleKeyPress}

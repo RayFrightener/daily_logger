@@ -14,6 +14,8 @@
   .dailySummary h3 {
     text-align: center; /* Center align the heading */
     margin-bottom: 30px; /* Add some space below the heading */
+    border-bottom: 2px solid #b3b3b3; /* Add underline */
+    padding-bottom: 1px;
   }
   
   .logItem {

@@ -7,10 +7,15 @@
     background-color: #C7BEBE; 
     min-width: 168px;
     min-height: 199px;
+    text-align: center;
   }
   
   .goalsForm h2 {
+    display: inline-block;
     text-align: center;
+    color: black;
+    border-bottom: 2px solid #b3b3b3; /* Add underline */
+    padding-bottom: 1px;
   }
   
   
@@ -22,6 +27,7 @@
   .goalsForm li {
     color: #000000;
     display: flex;
+    font-size: 20px;
     justify-content: space-between; /* Distribute space between goal text and button */
     align-items: center; /* Center content vertically */
     padding: 5px;
@@ -35,13 +41,14 @@
   .goalsForm li span {
     flex: 1; /* Allow the span to take up remaining space */
     text-align: center; /* Center text within the span */
+    margin-right: 5px;
   }
 
   .goalsForm li button {
     background-color: transparent; /* Make button background transparent */
     color: #000000; /* black color for the cross */
     border: none;
-    font-size: 10px; /* Increase font size for the cross */
+    font-size: 12px; /* Increase font size for the cross */
     cursor: pointer;
     opacity: 0.5; /* Make the button less prominent */
     text-decoration: none; /* Remove any link styling */
