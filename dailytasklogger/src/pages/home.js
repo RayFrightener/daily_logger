@@ -8,7 +8,6 @@ import Logger from "@/components/Logger"; // Placeholder for Logger component
 // import Chart from "@/components/Chart"; // Placeholder for Chart component
 import LogSummary from "@/components/LogSummary"; // Placeholder for DailySummary component
 
-
 export default function Home() {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

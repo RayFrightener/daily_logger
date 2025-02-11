@@ -1,11 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"; 
 import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/Logger.module.css";
+import TimePickerComponent from "@/components/TimePickerComponent";
+import dayjs from 'dayjs';
 
 export default function Logger( { refresh, setRefresh }) {
     const [log, setLog] = useState('');
     const [goals, setGoals] = useState([]);
     const [selectedGoal, setSelectedGoal] = useState('');
+    const [startTime, setStartTime] = useState(dayjs());
+    const [endTime, setEndTime] = useState(dayjs());   
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -24,7 +28,15 @@ export default function Logger( { refresh, setRefresh }) {
 
     const saveLog = async () => {
         const todayDate = new Date().toLocaleDateString('en-CA');
-        const { data, error } = await supabase.from('logs').insert([{ goal_id: selectedGoal, duration: parseFloat(log), log_date: todayDate }]);
+        const formattedStartTime = startTime.format('HH:mm');
+        const formattedEndTime = endTime.format('HH:mm');
+        console.log('Formatted Start Time:', formattedStartTime);
+        console.log('Formatted End Time:', formattedEndTime);
+        const { data, error } = await supabase.from('logs').insert([{ 
+            goal_id: selectedGoal, 
+            start_time: formattedStartTime,
+            end_time: formattedEndTime,
+            log_date: todayDate }]);
         if (error) {
             console.log('Error logging:', error);
             throw error;
@@ -52,23 +64,32 @@ export default function Logger( { refresh, setRefresh }) {
         <div className={Styles.logger}>
             <h2>Logger</h2>
             <select id="goals" value={selectedGoal} onChange={handleSelectChange}>
-
                 <option value="">Select a goal</option>
-                {goals.map((goal) =>(
+                {goals.map((goal) => (
                     <option key={goal.id} value={goal.id}>{goal.name}</option>
                 ))}
             </select>
-                <div className={Styles.inputButtonContainer}>
-                <input
-                className={Styles.logDuration}
-                placeholder="Add duration (1.5 for 1.5 hrs)"
-                value={log}
-                onChange={(e) => setLog(e.target.value)}
-                onKeyDown={handleKeyPress}
-                ref={inputRef}
-                />
+            <TimePickerComponent
+                startTime={startTime}
+                setStartTime={setStartTime}
+                endTime={endTime}
+                setEndTime={setEndTime}
+            />
+            <div className={Styles.inputButtonContainer}>
                 <button className={Styles.loggerButton} onClick={saveLog}>Log</button>
             </div>
         </div>
     );
 }
+
+
+// <div>
+// <div className={Styles.inputButtonContainer}> 
+//  <input
+// className={Styles.logDuration}
+// placeholder="Add duration (1.5 for 1.5 hrs)"
+// value={log}
+// onChange={(e) => setLog(e.target.value)}
+// onKeyDown={handleKeyPress}
+// ref={inputRef}
+// /> 

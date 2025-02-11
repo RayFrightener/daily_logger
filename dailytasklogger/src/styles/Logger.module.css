@@ -32,7 +32,13 @@
   .logger select option:not(:first-of-type) {
     color: black; /* Options color */
   }
-  
+  .inputButtonContainer {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
   .logDuration {
     width: 100%;
     max-width: 300px;
@@ -47,7 +53,7 @@
   
   .logDuration::placeholder {
     color: #6c757d; /* Change this to your desired placeholder color */
-  }
+    }
   
   .logDuration:focus {
     border-color: #000000;

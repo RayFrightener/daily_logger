@@ -1,0 +1,17 @@
+.timePickerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.timePickerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.timePickerWrapper label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
