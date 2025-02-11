@@ -19,13 +19,14 @@ export default function LogSummary({ refresh, setRefresh }) {
                 .select(`
                     id,
                     goal_id,
-                    duration,
+                    start_time,
+                    end_time,
                     goals!inner (
                         name
                     )
                 `)
                 .eq('log_date', todayDate);
-
+                
             if (error) {
                 console.log('Error fetching daily summary:', error);
             } else {
@@ -35,6 +36,7 @@ export default function LogSummary({ refresh, setRefresh }) {
         };
         fetchDailySummary();
     }, [refresh]);
+
     // function delete daily log
     const deleteLog = async (id) => {
         const { error } = await supabase.from('logs').delete().eq('id', id);
@@ -55,7 +57,7 @@ export default function LogSummary({ refresh, setRefresh }) {
             <h3>Logs summary</h3>
             {dailySummary.map((log) => (
                 <div key={log.id} className={Styles.logItem}>
-                    <span>{log.goals.name}: {log.duration} hrs</span>
+                    <span>{log.goals.name}: {log.start_time}-{log.end_time}</span>
                     <button className={Styles.dailyLogButtons} onClick={() => openEditLogModal(log)}>
                         <FaEdit />
                     </button>
