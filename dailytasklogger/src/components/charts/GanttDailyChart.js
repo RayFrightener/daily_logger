@@ -53,71 +53,69 @@ export const options = {
   },
 };
 
+export default function GanttDailyChart() {
+  const [dailyLogs, setDailyLogs] = useState([]);
+  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
-//define the problem 
-/**
- * we have data in the structure of id, goal_id, start_time, end_time as objects
- */
-// update labels dynamically with the goals,
-const labelss = dailyLogs.map((data) => 
-    data.goals.name
-))
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-// update log data dynamically as soon as there is a new log
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'DailyLogs',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+  useEffect(() => {
+    const fetchDailyLogs = async () => {
+      const todayDate = new Date().toLocaleDateString('en-CA');
+      console.log('Filtering logs for date:', todayDate);
+
+      const { data, error } = await supabase
+        .from('logs')
+        .select(`
+          id,
+          goal_id,
+          start_time,
+          end_time,
+          goals!inner (
+            name
+          )
+        `)
+        .eq('log_date', todayDate);
+
+      if (error) {
+        console.log('Error fetching daily summary:', error);
+      } else {
+        console.log('Fetched logs:', data);
+        setDailyLogs(data || []);
+      }
+    };
+    fetchDailyLogs();
+  }, []);
+
+  useEffect(() => {
+    if (dailyLogs.length > 0) {
+      const labels = dailyLogs.map(log => log.goals.name);
+      const datasets = [{
+        label: 'Daily Logs',
+        data: dailyLogs.map(log => {
+          const startTime = dayjs(`2025-02-11T${log.start_time}`);
+          const endTime = dayjs(`2025-02-11T${log.end_time}`);
+          const duration = endTime.diff(startTime, 'hour', true);
+
+          return {
+            x: [startTime.hour() + startTime.minute() / 60, endTime.hour() + endTime.minute() / 60],
+            y: log.goals.name,
+            duration: duration
+          };
+        }),
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }];
+
+      setChartData({
+        labels,
+        datasets
+      });
     }
-  ],
-};
-/** Define the problem and break it down into smaller problems
- * need a custom gantt chart created by using chart.js horizontal bar chart
- * where x-top is will have the hours of the day starting from 5:00 am till 12:00 am
- * y-left will be a list of goals and the duration has to be spread along the y-top 
- * dependent on the duration, for example if the start time: 7:00 and end time: 8:00
- * then parallel to the x-top daily timeline, plot the time duration  
- */
-
-export function GanttDailyChart() {
-    const [dailyLogs, setDailyLogs] = useState([]);
-        
-    useEffect(() => {
-        const fetchDailyLogs = async () => {
-            const todayDate = new Date().toLocaleDateString('en-CA'); //toISOString().split('T')[0]
-            console.log('Filtering logs for date:', todayDate);
-
-            const { data, error } = await supabase
-                .from('logs')
-                .select(`
-                    id,
-                    goal_id,
-                    start_time,
-                    end_time,
-                    goals!inner (
-                        name
-                    )
-                `)
-                .eq('log_date', todayDate);
-
-            if (error) {
-                console.log('Error fetching daily summary:', error);
-            } else {
-                console.log('Fetched logs:', data);
-                setDailyLogs(data || []);
-            }
-        };
-        fetchDailyLogs();
-    }, []);
+  }, [dailyLogs]);
 
   return (
     <div>
-        <Bar options={options} data={data} />
+      <Bar options={options} data={chartData} />
     </div>
-  )
+  );
 }
-

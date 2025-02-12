@@ -5,7 +5,7 @@ import GoalsList from "@/components/GoalsList";
 import Styles from "@/styles/home.module.css";
 import AddGoalModal from "@/components/AddGoalModal";
 import Logger from "@/components/Logger"; // Placeholder for Logger component
-// import Chart from "@/components/Chart"; // Placeholder for Chart component
+import Charts from "@/components/charts/Charts"; // Placeholder for Chart component
 import LogSummary from "@/components/LogSummary"; // Placeholder for DailySummary component
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
         <GoalsList refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <div className={Styles.section2}>
-        {/* <Chart /> */}
+        <Charts />
       </div>
       <div className={Styles.section3}>
         <LogSummary refresh={refresh} setRefresh={setRefresh}/>
