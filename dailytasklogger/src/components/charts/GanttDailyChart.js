@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import supabase from '@/utils/supabase/client';
+import Styles from '@/styles/GanttDailyChart.module.css'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,8 +26,11 @@ export const options = {
   indexAxis: 'y',
   elements: {
     bar: {
-      borderWidth: 2,
-    },
+        borderWidth: 2,
+        barThickness: 10, // Adjust the bar thickness
+        categoryPercentage: 0.8, // Adjust the category percentage
+        barPercentage: 0.9, // Adjust the bar percentage
+      },
   },
   responsive: true,
   scales: {
@@ -43,12 +47,9 @@ export const options = {
     }
   },
   plugins: {
-    legend: {
-      position: 'right',
-    },
     title: {
       display: true,
-      text: 'Daily Logs',
+      text: 'Daily',
     },
   },
 };
@@ -89,7 +90,7 @@ export default function GanttDailyChart() {
     if (dailyLogs.length > 0) {
       const labels = dailyLogs.map(log => log.goals.name);
       const datasets = [{
-        label: 'Daily Logs',
+        label: 'Duration',
         data: dailyLogs.map(log => {
           const startTime = dayjs(`2025-02-11T${log.start_time}`);
           const endTime = dayjs(`2025-02-11T${log.end_time}`);
@@ -114,8 +115,8 @@ export default function GanttDailyChart() {
   }, [dailyLogs]);
 
   return (
-    <div>
-      <Bar options={options} data={chartData} />
+    <div className={Styles.chartContainer}>
+      <Bar options={options} data={chartData} className={Styles.chartCanvas} />
     </div>
   );
 }

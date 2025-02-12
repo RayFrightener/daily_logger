@@ -44,7 +44,7 @@ export default function Home() {
       {user &&  <p>Hello, {user.email}</p>}
       <div className={Styles.section1}>
         <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
-        <GoalsList refresh={refresh} setRefresh={setRefresh}/>
+        <GoalsList className={Styles.goalsList} refresh={refresh} setRefresh={setRefresh}/>
       </div>
       <div className={Styles.section2}>
         <Charts />
