@@ -21,7 +21,7 @@ body {
   justify-content: flex-start; /* Align the button to the left */}
 
 .addGoalButton {
-  width: 120px;
+  width: 100px;
   height: 45px;
   padding: 10px 20px;
   background-color: #DCD9D9;
@@ -29,7 +29,7 @@ body {
   border: none;
   border-radius: 14px;
   cursor: pointer;
-  font-size: 13px; /* Adjust font size as needed */
+  font-size: 14px; /* Adjust font size as needed */
   display: flex;
   justify-content: start;
   align-items: center;
@@ -42,18 +42,24 @@ body {
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
-    "section1 section2"
-    "section4 section3";
-  gap: 20px;
+  "section1And4 section2"
+  "section1And4 section3";
+  /* gap: 20px; */
   width: 100%;
   height: 100%;
   box-sizing: border-box;
 }
 
+.section1And4 {
+  grid-area: section1And4;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
 .section1 {
-  grid-area: section1;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -70,6 +76,4 @@ body {
   /* align-self: start; Align to the start of the grid cell */
 }
 
-.section4 {
-  grid-area: section4;
-}
+

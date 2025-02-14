@@ -31,7 +31,7 @@ export default function GoalsList({ refresh, setRefresh }) {
 
   return (
     <div className={Styles.goalsForm}>
-      <h2>Your Goals: Always be mindful of them!</h2>
+      <h2>Objectives</h2>
       <ul>
         {goals.map((goal) => (
           <li key={goal.id}>

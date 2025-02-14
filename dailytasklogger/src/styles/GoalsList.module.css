@@ -1,7 +1,7 @@
 .goalsForm {
     max-width: 400px;
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-left: 60px;
+    margin-top: 70px;
     padding: 5px;
     /* border: 1px solid #ccc; */
     border-radius: 14px;
@@ -16,7 +16,7 @@
     display: inline-block;
     text-align: center;
     color: black;
-    /* border-bottom: 2px solid #b3b3b3; Add underline */
+    border-bottom: 2px solid #b3b3b3; /*Add an underline*/
     margin-bottom: 10px;
     font-weight: 500;
   }
@@ -34,7 +34,7 @@
     justify-content: space-between; /* Distribute space between goal text and button */
     align-items: center; /* Center content vertically */
     padding: 5px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 8px;
     margin-bottom: 5px;
     background-color: #C7BEBE;

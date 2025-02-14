@@ -27,12 +27,13 @@ export const options = {
   elements: {
     bar: {
         borderWidth: 2,
-        barThickness: 10, // Adjust the bar thickness
-        categoryPercentage: 0.8, // Adjust the category percentage
-        barPercentage: 0.9, // Adjust the bar percentage
+        barThickness: 1, // Adjust the bar thickness
+        categoryPercentage: 0.5, // Adjust the category percentage
+        barPercentage: 0.5, // Adjust the bar percentage
       },
   },
   responsive: true,
+  maintainAspectRatio: false,
   scales: {
     x: {
       type: 'linear',
@@ -49,10 +50,28 @@ export const options = {
   plugins: {
     title: {
       display: true,
-      text: 'Daily',
     },
+    tooltip: {
+      enabled: true,
+      mode: 'nearest',
+      intersect: false,
+      callbacks: {
+        label: function(context) {
+          const startTime = dayjs().startOf('day').add(context.raw.x[0], 'hour').format('HH:mm');
+          const endTime = dayjs().startOf('day').add(context.raw.x[1], 'hour').format('HH:mm');
+          return `${startTime} - ${endTime}`;
+        }
+      }
+    }
   },
+  hover: {
+    animationDuration: 0, // Disable animation on hover
+  },
+  animation: {
+    duration: 0, // General animation time
+  }
 };
+
 
 export default function GanttDailyChart() {
   const [dailyLogs, setDailyLogs] = useState([]);
@@ -97,7 +116,7 @@ export default function GanttDailyChart() {
           const duration = endTime.diff(startTime, 'hour', true);
 
           return {
-            x: [startTime.hour() + startTime.minute() / 60, endTime.hour() + endTime.minute() / 60],
+            x: [Math.floor(startTime.hour() + startTime.minute() / 60), Math.floor(endTime.hour() + endTime.minute() / 60)],
             y: log.goals.name,
             duration: duration
           };

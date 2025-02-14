@@ -45,17 +45,19 @@ export default function Home() {
         <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
       </div>
       <div className={Styles.gridContainer}>
-        <div className={Styles.section1}>
-          <GoalsList className={Styles.goalsList} refresh={refresh} setRefresh={setRefresh}/>
+        <div className={Styles.section1And4}>
+          <div className={Styles.section1}>
+            <GoalsList className={Styles.goalsList} refresh={refresh} setRefresh={setRefresh}/>
+          </div>
+          <div className={Styles.section4}>
+            <Logger refresh={refresh} setRefresh={setRefresh}/>
+          </div>
         </div>
         <div className={Styles.section2}>
           <Charts />
         </div>
         <div className={Styles.section3}>
           <LogSummary refresh={refresh} setRefresh={setRefresh}/>
-        </div>
-        <div className={Styles.section4}>
-          <Logger refresh={refresh} setRefresh={setRefresh}/>
         </div>
       </div>
       <AddGoalModal
