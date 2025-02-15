@@ -6,7 +6,7 @@ export default function GoalsList({ refresh, setRefresh }) {
   const [goals, setGoals] = useState([]);
 
   const fetchGoals = async () => {
-    const { data, error } = await supabase.from('goals').select('id, name');
+    const { data, error } = await supabase.from('goals').select('id, name').eq('deleted', false);
     if (error) {
       console.log('Error fetching goals:', error);
     } else {
@@ -20,7 +20,7 @@ export default function GoalsList({ refresh, setRefresh }) {
   }, [refresh]);
 
   const deleteGoal = async (id) => {
-    const { error } = await supabase.from('goals').delete().eq('id', id);
+    const { error } = await supabase.from('goals').update({ deleted: true}).eq('id', id);
     if (error) {
       console.error('Error deleting goal:', error);
     } else {

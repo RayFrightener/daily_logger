@@ -1,21 +1,14 @@
-/**
- * chart component:
- * 2 buttons on top: daily/weekly
- * daily gantt chart
- * weekly stacked bar chart
- */
-
 import React, { useState } from "react";
 import GanttDailyChart from "./GanttDailyChart";
 import Styles from "@/styles/Charts.module.css";
 
-export default function Charts() {
+export default function Charts({ refresh }) {
     const [selectedChart, setSelectedChart] = useState('gantt');
 
     const renderCharts = () => {
         switch (selectedChart) {
             case 'gantt':
-                return <GanttDailyChart />;
+                return <GanttDailyChart refresh={refresh} />;
             case 'stackedBar':
                 return <div>Weekly Stacked Bar Chart Placeholder</div>;
             default:

@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/EditLogModal.module.css";
+import TimePickerComponent from "@/components/TimePickerComponent";
+import dayjs from 'dayjs';
+
 
 export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
-    const [newDuration, setNewDuration] = useState('');
+    const [startTime, setStartTime] = useState(dayjs());
+    const [endTime, setEndTime] = useState(dayjs());
     const [message, setMessage] = useState('');
     const inputRef = useRef(null);
 
@@ -11,18 +15,23 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
         if (isOpen && inputRef.current) {
             inputRef.current.focus();
         }
-    }, [isOpen]);
+        if (log) {
+            setStartTime(dayjs(`2025-02-11T${log.start_time}`));
+            setEndTime(dayjs(`2025-02-11T${log.end_time}`));
+        }
+    }, [isOpen, log]);
 
     const handleUpdate = async () => {
+        const formattedStartTime = startTime.format('HH:mm');
+        const formattedEndTime = endTime.format('HH:mm');
         const { error } = await supabase
             .from('logs')
-            .update({ duration: parseFloat(newDuration) })
+            .update({ start_time: formattedStartTime, end_time: formattedEndTime })
             .eq('id', log.id);
         if (error) {
             console.log('Error updating log:', error);
         } else {
             setMessage('Log updated!');
-            setNewDuration('');
             setTimeout(() => {
                 setMessage('');
                 setRefresh(prev => !prev);
@@ -44,14 +53,11 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
             <div className={Styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={Styles.closeButton} onClick={onClose}>×</button>
                 <h2>Change duration of: {log.goals.name}</h2>
-                <input
-                type="text"
-                placeholder="Type in new duration"
-                value={newDuration}
-                onChange={(e) => setNewDuration(e.target.value)}
-                className={Styles.inputField}
-                onKeyDown={handleKeyPress}
-                ref={inputRef}
+                <TimePickerComponent
+                    startTime={startTime}
+                    setStartTime={setStartTime}
+                    endTime={endTime}
+                    setEndTime={setEndTime}
                 />
                 <div className={Styles.buttonMessageContainer}>
                     {message && <p className={Styles.message}>{message}</p>}

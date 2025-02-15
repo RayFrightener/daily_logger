@@ -14,7 +14,7 @@ export default function Logger( { refresh, setRefresh }) {
 
     useEffect(() => {
         const fetchGoals = async () => {
-            const { data, error } = await supabase.from('goals').select('id, name').select();
+            const { data, error } = await supabase.from('goals').select('id, name').eq('deleted', false).select();
             if (error) {
                 console.log('Error fetching goals:', error);
             } else {

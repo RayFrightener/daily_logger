@@ -41,8 +41,9 @@ export const options = {
       min: 5,
       max: 24,
       ticks: {
+        stepSize: 1,
         callback: function(value) {
-          return dayjs().startOf('day').add(value, 'hour').format('HH:mm');
+          return dayjs().startOf('day').add(value, 'hour').format('hh:mm A');
         }
       }
     }
@@ -57,8 +58,8 @@ export const options = {
       intersect: false,
       callbacks: {
         label: function(context) {
-          const startTime = dayjs().startOf('day').add(context.raw.x[0], 'hour').format('HH:mm');
-          const endTime = dayjs().startOf('day').add(context.raw.x[1], 'hour').format('HH:mm');
+          const startTime = dayjs().startOf('day').add(context.raw.x[0], 'hour').format('hh:mm A');
+          const endTime = dayjs().startOf('day').add(context.raw.x[1], 'hour').format('hh:mm A');
           return `${startTime} - ${endTime}`;
         }
       }
@@ -73,7 +74,7 @@ export const options = {
 };
 
 
-export default function GanttDailyChart() {
+export default function GanttDailyChart({ refresh }) {
   const [dailyLogs, setDailyLogs] = useState([]);
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
@@ -103,26 +104,46 @@ export default function GanttDailyChart() {
       }
     };
     fetchDailyLogs();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
+    console.log('Daily Logs', dailyLogs);
     if (dailyLogs.length > 0) {
-      const labels = dailyLogs.map(log => log.goals.name);
+      // step 1; initialize an empty object to store aggregate log by goal
+      const aggregatedLogs = {};
+      // step 2: iterate over dailyLogs
+      dailyLogs.forEach(log => {
+        const goalName = log.goals.name;
+        const startTime = dayjs(`2025-02-11T${log.start_time}`);
+        const endTime = dayjs(`2025-02-11T${log.end_time}`);
+
+        // step 3: aggregate logs
+        if(!aggregatedLogs[goalName]) {
+          aggregatedLogs[goalName] = [];
+        } 
+        aggregatedLogs[goalName].push({ startTime, endTime });
+      });
+
+      // step 4 convert object back to array for plotting
+      const labels = Object.keys(aggregatedLogs);
       const datasets = [{
         label: 'Duration',
-        data: dailyLogs.map(log => {
-          const startTime = dayjs(`2025-02-11T${log.start_time}`);
-          const endTime = dayjs(`2025-02-11T${log.end_time}`);
-          const duration = endTime.diff(startTime, 'hour', true);
+        data: labels.flatMap(goalName => {
+          return aggregatedLogs[goalName].map(({ startTime, endTime }) => {
+            const startHour = startTime.hour();
+            const startMinute = startTime.minute();
+            const endHour = endTime.hour();
+            const endMinute = endTime.minute();
 
-          return {
-            x: [Math.floor(startTime.hour() + startTime.minute() / 60), Math.floor(endTime.hour() + endTime.minute() / 60)],
-            y: log.goals.name,
-            duration: duration
-          };
+            return {
+              x: [startHour + startMinute / 60, endHour + endMinute / 60],
+              y: goalName,
+              duration: `${endHour - startHour}h ${endMinute - startMinute}m`
+            };
+          });
         }),
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(166, 157, 157, 0.5)', // Darker Shade of Background
+        borderColor: 'rgba(166, 157, 157, 1)', // Darker Shade of Background
         borderWidth: 1
       }];
 

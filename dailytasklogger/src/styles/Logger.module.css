@@ -1,5 +1,5 @@
 .logger {
-    background-color: #C7BEBE;
+    background-color: #DCD9D9;
     padding: 20px;
     border-radius: 14px;
     min-width: 470px;
@@ -71,12 +71,12 @@
   
   .loggerButton {
     padding: 10px 20px;
-    background-color: #DCD9D9;
+    background-color: #C7BEBE;
     color: black;
     border: none;
     border-radius: 14px;
     cursor: pointer;
-    margin-left: 10px; /* Add some space between the input and button */
+    margin-left: auto; /* Add some space between the input and button */
   }
   
   .loggerButton:hover {

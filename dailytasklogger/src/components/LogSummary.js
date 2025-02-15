@@ -3,6 +3,7 @@ import supabase from "@/utils/supabase/client";
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Styles from '@/styles/LogSummary.module.css';
 import EditLogModal from '@/components/EditLogModal';
+import dayjs from 'dayjs';
 
 export default function LogSummary({ refresh, setRefresh }) {
     const [dailySummary, setDailySummary] = useState([]);
@@ -21,7 +22,7 @@ export default function LogSummary({ refresh, setRefresh }) {
                     goal_id,
                     start_time,
                     end_time,
-                    goals!inner (
+                    goals (
                         name
                     )
                 `)
@@ -54,10 +55,14 @@ export default function LogSummary({ refresh, setRefresh }) {
 
     return (
         <div className={Styles.dailySummary}>
-            <h3>Logs summary</h3>
+            <h3>Daily summary</h3>
             {dailySummary.map((log) => (
                 <div key={log.id} className={Styles.logItem}>
-                    <span>{log.goals.name}: {log.start_time}-{log.end_time}</span>
+                    <span>
+                        {log.goals ? log.goals.name: 'Removed'}: 
+                        {dayjs(`2025-02-11T${log.start_time}`).format('hh:mm A')} - 
+                        {dayjs(`2025-02-11T${log.end_time}`).format('hh:mm A')} 
+                    </span>
                     <button className={Styles.dailyLogButtons} onClick={() => openEditLogModal(log)}>
                         <FaEdit />
                     </button>

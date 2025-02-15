@@ -54,7 +54,7 @@ export default function Home() {
           </div>
         </div>
         <div className={Styles.section2}>
-          <Charts />
+          <Charts refresh={refresh}/>
         </div>
         <div className={Styles.section3}>
           <LogSummary refresh={refresh} setRefresh={setRefresh}/>

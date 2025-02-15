@@ -13,7 +13,7 @@
 .modalContent {
     background-color: #C7BEBE;
     width: 472px;
-    height: 200px;
+    height: 275px;
     text-align: center;
     color: black;
     padding: 20px;
@@ -21,6 +21,10 @@
     position: relative;
     max-width: 400px;
     width: 100%;
+}
+
+.modalContent h2 { 
+    margin-bottom: 5px;
 }
 
 .closeButton {
