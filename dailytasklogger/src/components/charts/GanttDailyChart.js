@@ -24,14 +24,6 @@ ChartJS.register(
 
 export const options = {
   indexAxis: 'y',
-  elements: {
-    bar: {
-        borderWidth: 2,
-        barThickness: 1, // Adjust the bar thickness
-        categoryPercentage: 0.5, // Adjust the category percentage
-        barPercentage: 0.5, // Adjust the bar percentage
-      },
-  },
   responsive: true,
   maintainAspectRatio: false,
   scales: {
@@ -81,7 +73,6 @@ export default function GanttDailyChart({ refresh }) {
   useEffect(() => {
     const fetchDailyLogs = async () => {
       const todayDate = new Date().toLocaleDateString('en-CA');
-      console.log('Filtering logs for date:', todayDate);
 
       const { data, error } = await supabase
         .from('logs')
@@ -99,7 +90,6 @@ export default function GanttDailyChart({ refresh }) {
       if (error) {
         console.log('Error fetching daily summary:', error);
       } else {
-        console.log('Fetched logs:', data);
         setDailyLogs(data || []);
       }
     };
@@ -144,7 +134,10 @@ export default function GanttDailyChart({ refresh }) {
         }),
         backgroundColor: 'rgba(166, 157, 157, 0.5)', // Darker Shade of Background
         borderColor: 'rgba(166, 157, 157, 1)', // Darker Shade of Background
-        borderWidth: 1
+        borderWidth: 1,
+        barThickness: 50, // Thin bars
+        categoryPercentage: 0.9, // Reduce bar width inside category
+        maxBarThickness: 60, // Prevents bars from getting too thick
       }];
 
       setChartData({
