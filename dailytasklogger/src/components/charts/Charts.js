@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GanttDailyChart from "./GanttDailyChart";
+import { StackedBarChart } from "./StackedBarChart";
 import Styles from "@/styles/Charts.module.css";
 
 export default function Charts({ refresh }) {
@@ -10,7 +11,7 @@ export default function Charts({ refresh }) {
             case 'gantt':
                 return <GanttDailyChart refresh={refresh} />;
             case 'stackedBar':
-                return <div>Weekly Stacked Bar Chart Placeholder</div>;
+                return <StackedBarChart refresh={refresh} />;
             default:
                 return null;
         }

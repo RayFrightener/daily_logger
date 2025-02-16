@@ -28,7 +28,7 @@
     background-color: #DCD9D9;
     font-size: 16px;
     color: black; /* Placeholder color */
-  }
+}
   
   .logger select option:not(:first-of-type) {
     color: black; /* Options color */

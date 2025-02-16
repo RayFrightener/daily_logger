@@ -3,6 +3,15 @@ import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/Logger.module.css";
 import TimePickerComponent from "@/components/TimePickerComponent";
 import dayjs from 'dayjs';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#C7BEBE', // Change this to your desired color
+      },
+    },
+  });
 
 export default function Logger( { refresh, setRefresh }) {
     const [log, setLog] = useState('');
@@ -61,35 +70,25 @@ export default function Logger( { refresh, setRefresh }) {
     };
 
     return (
-        <div className={Styles.logger}>
-            <h2>Logger</h2>
-            <select id="goals" value={selectedGoal} onChange={handleSelectChange}>
-                <option value="">Select a goal</option>
-                {goals.map((goal) => (
-                    <option key={goal.id} value={goal.id}>{goal.name}</option>
-                ))}
-            </select>
-            <TimePickerComponent
-                startTime={startTime}
-                setStartTime={setStartTime}
-                endTime={endTime}
-                setEndTime={setEndTime}
-            />
-            <div className={Styles.inputButtonContainer}>
-                <button className={Styles.loggerButton} onClick={saveLog}>Log</button>
+        <ThemeProvider theme={theme}>
+            <div className={Styles.logger}>
+                <h2>Logger</h2>
+                <select id="goals" value={selectedGoal} onChange={handleSelectChange}>
+                    <option value="">Select a goal</option>
+                    {goals.map((goal) => (
+                        <option key={goal.id} value={goal.id}>{goal.name}</option>
+                    ))}
+                </select>
+                <TimePickerComponent
+                    startTime={startTime}
+                    setStartTime={setStartTime}
+                    endTime={endTime}
+                    setEndTime={setEndTime}
+                />
+                <div className={Styles.inputButtonContainer}>
+                    <button className={Styles.loggerButton} onClick={saveLog}>Log</button>
+                </div>
             </div>
-        </div>
+        </ThemeProvider>
     );
 }
-
-
-// <div>
-// <div className={Styles.inputButtonContainer}> 
-//  <input
-// className={Styles.logDuration}
-// placeholder="Add duration (1.5 for 1.5 hrs)"
-// value={log}
-// onChange={(e) => setLog(e.target.value)}
-// onKeyDown={handleKeyPress}
-// ref={inputRef}
-// /> 

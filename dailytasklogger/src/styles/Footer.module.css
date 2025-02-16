@@ -1,0 +1,32 @@
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #d7d4d4;
+    border-top: 1px solid #d7d4d4;
+    border-radius: 14px;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.feedbackButton {
+    margin-left: auto; /* Push the button to the right */
+    padding: 10px 20px;
+    background-color: #C7BEBE;
+    color: black;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.feedbackButton:hover {
+    background-color: #9c9191;
+}

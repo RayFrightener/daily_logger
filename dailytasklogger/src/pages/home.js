@@ -7,10 +7,14 @@ import AddGoalModal from "@/components/AddGoalModal";
 import Logger from "@/components/Logger"; // Placeholder for Logger component
 import Charts from "@/components/charts/Charts"; // Placeholder for Chart component
 import LogSummary from "@/components/LogSummary"; // Placeholder for DailySummary component
+import FeedBackModal from "@/components/FeedbackModal";
+import Footer from "@/components/Footer";
+
 
 export default function Home() {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const router = useRouter();
 
@@ -39,32 +43,51 @@ export default function Home() {
     }
   }
 
+  const handleFeedbackSubmit = async (name, feedback) => {
+    const { data, error } = await supabase.from('suggestions').insert([{ name: name, suggestion_text: feedback}])
+    if (error) {
+      console.error('Error inserting feedback', error);
+    } else {
+      console.log('feedback submitted', data);
+      setIsFeedbackModalOpen(false);
+    }
+  }; 
+
+
   return (
     <div className={Styles.page}>
-      <div className={Styles.buttonWrapper}>
-        <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
-      </div>
-      <div className={Styles.gridContainer}>
-        <div className={Styles.section1And4}>
-          <div className={Styles.section1}>
-            <GoalsList className={Styles.goalsList} refresh={refresh} setRefresh={setRefresh}/>
+      <div className={Styles.content}>
+        <div className={Styles.buttonWrapper}>
+          <button className={Styles.addGoalButton} onClick={() => setIsModalOpen(true)}>Define Goals</button>
+        </div>
+        <div className={Styles.gridContainer}>
+          <div className={Styles.section1And4}>
+            <div className={Styles.section1}>
+              <GoalsList className={Styles.goalsList} refresh={refresh} setRefresh={setRefresh}/>
+            </div>
+            <div className={Styles.section4}>
+              <Logger refresh={refresh} setRefresh={setRefresh}/>
+            </div>
           </div>
-          <div className={Styles.section4}>
-            <Logger refresh={refresh} setRefresh={setRefresh}/>
+          <div className={Styles.section2}>
+            <Charts refresh={refresh}/>
+          </div>
+          <div className={Styles.section3}>
+            <LogSummary refresh={refresh} setRefresh={setRefresh}/>
           </div>
         </div>
-        <div className={Styles.section2}>
-          <Charts refresh={refresh}/>
-        </div>
-        <div className={Styles.section3}>
-          <LogSummary refresh={refresh} setRefresh={setRefresh}/>
-        </div>
+        <AddGoalModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleAddGoal}
+        />
+        <FeedBackModal
+          isOpen={isFeedbackModalOpen}
+          onClose={() => setIsFeedbackModalOpen(false)}
+          onSubmit={handleFeedbackSubmit}
+        />
       </div>
-      <AddGoalModal
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      onSave={handleAddGoal}
-      />
+      <Footer onFeedbackClick={() => setIsFeedbackModalOpen(true)} />
     </div>
   );
 }

@@ -3,7 +3,15 @@ import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/EditLogModal.module.css";
 import TimePickerComponent from "@/components/TimePickerComponent";
 import dayjs from 'dayjs';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#C7BEBE', // Change this to your desired color
+      },
+    },
+  });
 
 export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
     const [startTime, setStartTime] = useState(dayjs());
@@ -49,6 +57,7 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
     };
 
     return (
+        <ThemeProvider theme={theme}>
         <div className={Styles.modalOverlay} onClick={onClose}>
             <div className={Styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={Styles.closeButton} onClick={onClose}>×</button>
@@ -65,5 +74,6 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
                 </div>
             </div>
         </div>
+    </ThemeProvider>
     );
 }
