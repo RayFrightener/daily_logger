@@ -10,7 +10,6 @@ export default function GoalsList({ refresh, setRefresh }) {
     if (error) {
       console.log('Error fetching goals:', error);
     } else {
-      console.log('fetched goals:', data);
       setGoals(data || []);
     }
   };

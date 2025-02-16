@@ -13,7 +13,6 @@ export default function LogSummary({ refresh, setRefresh }) {
     useEffect(() => {
         const fetchDailySummary = async () => {
             const todayDate = new Date().toLocaleDateString('en-CA'); //toISOString().split('T')[0]
-            console.log('Filtering logs for date:', todayDate);
 
             const { data, error } = await supabase
                 .from('logs')
@@ -31,7 +30,6 @@ export default function LogSummary({ refresh, setRefresh }) {
             if (error) {
                 console.log('Error fetching daily summary:', error);
             } else {
-                console.log('Fetched logs:', data);
                 setDailySummary(data || []);
             }
         };

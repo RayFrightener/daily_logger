@@ -57,7 +57,6 @@ export function StackedBarChart({ refresh }) {
             const startOfWeek = dayjs().startOf('week').add(-6, 'day').format('YYYY-MM-DD');
             const endOfWeek = dayjs().endOf('week').add(-6, 'day').format('YYYY-MM-DD');
 
-            console.log('Fetching logs from:', startOfWeek, 'to:', endOfWeek);
             const { data, error } = await supabase
             .from('logs')
             .select(`
@@ -76,7 +75,6 @@ export function StackedBarChart({ refresh }) {
             if (error) {
                 console.log('Error getting weekly summary', error);
             } else {
-                console.log('Fetched weekly logs', data);
                 setWeeklyLogs(data || []);
             }
         };
@@ -93,8 +91,6 @@ export function StackedBarChart({ refresh }) {
                 const endTime = dayjs(`2025-02-11T${log.end_time}`);
                 const duration = endTime.diff(startTime, 'hour', true); // Calculate duration in hours
               
-                console.log('log:', log);
-                console.log('Duration:', duration);
                 if (!aggregatedLogs[goalName]) {
                   aggregatedLogs[goalName] = Array(7).fill(0); // Initialize array for 7 days
                 }
@@ -106,7 +102,6 @@ export function StackedBarChart({ refresh }) {
                 aggregatedLogs[goalName][dayOfWeek] += duration;
               });
 
-              console.log('Aggregated Logs:', aggregatedLogs); // Debug statement
 ``
             const labels = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
             const datasets = Object.keys(aggregatedLogs).map(goalName => ({

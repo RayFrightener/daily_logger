@@ -27,7 +27,6 @@ export default function Logger( { refresh, setRefresh }) {
             if (error) {
                 console.log('Error fetching goals:', error);
             } else {
-                console.log('Goals fetched:', data);
                 setGoals(data || []);
             }
         };
@@ -50,7 +49,6 @@ export default function Logger( { refresh, setRefresh }) {
             console.log('Error logging:', error);
             throw error;
         } else {
-            console.log('Successfully logged', data);
             setLog(''); // clear the input field after saving the log
             setRefresh(prev => !prev);
         }

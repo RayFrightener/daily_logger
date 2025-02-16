@@ -57,7 +57,6 @@ export function MonthlyStackedBarChart({ refresh }) {
             const startOfMonth = dayjs().startOf('month').format('YYYY-MM-DD');
             const endOfMonth = dayjs().endOf('month').format('YYYY-MM-DD');
 
-            console.log('Fetching logs from:', startOfMonth, 'to:', endOfMonth);
             const { data, error } = await supabase
             .from('logs')
             .select(`
@@ -76,7 +75,6 @@ export function MonthlyStackedBarChart({ refresh }) {
             if (error) {
                 console.log('Error getting monthly summary', error);
             } else {
-                console.log('Fetched monthly logs', data);
                 setMonthlyLogs(data || []);
             }
         };
@@ -93,8 +91,6 @@ export function MonthlyStackedBarChart({ refresh }) {
                 const endTime = dayjs(`2025-02-11T${log.end_time}`);
                 const duration = endTime.diff(startTime, 'hour', true); // Calculate duration in hours
               
-                console.log('log:', log);
-                console.log('Duration:', duration);
                 if (!aggregatedLogs[goalName]) {
                     aggregatedLogs[goalName] = Array(dayjs().daysInMonth()).fill(0); // Initialize array for days in the month
                   }
@@ -104,7 +100,6 @@ export function MonthlyStackedBarChart({ refresh }) {
                 aggregatedLogs[goalName][dayOfMonth] += duration;
               });
 
-              console.log('Aggregated Logs:', aggregatedLogs); // Debug statement
               
               const labels = Array.from({ length: dayjs().daysInMonth() }, (_, i) => i + 1); // Labels for each day of the month
               const datasets = Object.keys(aggregatedLogs).map(goalName => ({
