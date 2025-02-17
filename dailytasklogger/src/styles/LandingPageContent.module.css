@@ -1,14 +1,5 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #DCD9D9; /* Set background color for the entire page */
-}
-
 .container {
-  background-color: #DCD9D9; /* Set background color for the container */
+  background-color: #DCD9D9; 
   width: 100%;
   height: 100%;
 }
