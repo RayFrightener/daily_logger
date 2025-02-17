@@ -54,8 +54,8 @@ export function StackedBarChart({ refresh }) {
     
     useEffect(() => {
         const fetchWeeklySummary = async () => {
-            const startOfWeek = dayjs().startOf('week').add(-6, 'day').format('YYYY-MM-DD');
-            const endOfWeek = dayjs().endOf('week').add(-6, 'day').format('YYYY-MM-DD');
+            const startOfWeek = dayjs().startOf('week').add(1, 'day').format('YYYY-MM-DD'); // Monday
+            const endOfWeek = dayjs().startOf('week').add(7, 'day').format('YYYY-MM-DD'); // Sunday            
 
             const { data, error } = await supabase
             .from('logs')
@@ -97,7 +97,7 @@ export function StackedBarChart({ refresh }) {
               
                 let dayOfWeek = dayjs(log.log_date).day(); // Get day of the week (0-6)
                 // // Adjust dayOfWeek to start from Monday (0) to Sunday (6)
-                dayOfWeek = (dayOfWeek + 6) % 7;
+                dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
                 
                 aggregatedLogs[goalName][dayOfWeek] += duration;
               });
