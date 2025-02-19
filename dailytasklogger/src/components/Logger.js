@@ -17,6 +17,7 @@ export default function Logger( { refresh, setRefresh }) {
     const [log, setLog] = useState('');
     const [goals, setGoals] = useState([]);
     const [selectedGoal, setSelectedGoal] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const [startTime, setStartTime] = useState(dayjs());
     const [endTime, setEndTime] = useState(dayjs());   
     const inputRef = useRef(null);
@@ -35,6 +36,12 @@ export default function Logger( { refresh, setRefresh }) {
     }, [refresh]);
 
     const saveLog = async () => {
+        if (!selectedGoal) {
+            setErrorMessage('Please select a goal');
+            return;
+        }
+        setErrorMessage('');
+
         const todayDate = new Date().toLocaleDateString('en-CA');
         const formattedStartTime = startTime.format('HH:mm');
         const formattedEndTime = endTime.format('HH:mm');
@@ -82,6 +89,7 @@ export default function Logger( { refresh, setRefresh }) {
                     setEndTime={setEndTime}
                 />
                 <div className={Styles.inputButtonContainer}>
+                    {errorMessage && <span className={Styles.errorMessage}>{errorMessage}</span>}
                     <button className={Styles.loggerButton} onClick={saveLog}>Log</button>
                 </div>
             </div>
