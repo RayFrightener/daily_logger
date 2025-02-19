@@ -38,8 +38,6 @@ export default function Logger( { refresh, setRefresh }) {
         const todayDate = new Date().toLocaleDateString('en-CA');
         const formattedStartTime = startTime.format('HH:mm');
         const formattedEndTime = endTime.format('HH:mm');
-        console.log('Formatted Start Time:', formattedStartTime);
-        console.log('Formatted End Time:', formattedEndTime);
         const { data, error } = await supabase.from('logs').insert([{ 
             goal_id: selectedGoal, 
             start_time: formattedStartTime,

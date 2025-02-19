@@ -97,7 +97,6 @@ export default function GanttDailyChart({ refresh }) {
   }, [refresh]);
 
   useEffect(() => {
-    console.log('Daily Logs', dailyLogs);
     if (dailyLogs.length > 0) {
       // step 1; initialize an empty object to store aggregate log by goal
       const aggregatedLogs = {};
