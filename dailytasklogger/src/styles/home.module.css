@@ -68,4 +68,27 @@
   /* align-self: start; Align to the start of the grid cell */
 }
 
+@media (max-width: 844px) {
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .section1And4 {
+    gap: 40px;
+  }
+
+  .section1 {
+    margin-right: 50px;
+  }
+
+  .section3 {
+    margin-top: 20px;
+    margin-left: 100px;
+  }
+  .buttonWrapper {
+    margin-left: 50px;
+  }
+}
 

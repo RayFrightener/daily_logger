@@ -1,9 +1,19 @@
 .videoContainer {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
-.videoContainer iframe {
+.videoIframe {
   max-width: 100%;
+  height: auto;
+}
+
+/* Media query for devices with a width shorter than 768px */
+@media (max-width: 768px) {
+  .videoIframe {
+    max-height: 250px;
+  }
 }

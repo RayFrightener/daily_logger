@@ -1,39 +1,47 @@
-
 .page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100vw;
   height: 100vh;
-  box-sizing: border-box; /* Ensure padding is included in the height and width */
-  background-color: #DCD9D9; 
+  box-sizing: border-box;
 }
 
 .main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px;
-  flex: 1; /* Ensure the main content takes up the remaining space */
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: row;
   width: 100%;
+  justify-content: space-between;
 }
 
 .left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
+  padding: 20px;
 }
 
 .right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
+  padding: 20px;
+}
+
+/* Media query for devices with a width shorter than 768px */
+@media (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    padding: 10px;
+  }
+  .right {
+    max-height: 300px;
+  }
 }
