@@ -8,7 +8,6 @@ export default function LandingPageContent() {
         <h2>What?</h2>
         <p>The <strong>Daily Task Logger</strong> is a powerful yet simple tool created for lifelong learners. It helps you track and analyze the progress of the areas you care about and want to improve. By logging your daily tasks, it provides meaningful, visual insights into how you're spending your time.</p>
         
-        {/* <hr /> */}
 
         <h2>Why?</h2>
         <ul>
@@ -17,7 +16,6 @@ export default function LandingPageContent() {
           <li><strong>Improved Focus</strong>: Reflect on how your time is spent and align it with your goals.</li>
         </ul>
         
-        {/* <hr /> */}
 
         <h2>How?</h2>
         <ol>
@@ -26,7 +24,6 @@ export default function LandingPageContent() {
           <li><strong>View Your Progress</strong>: The app transforms your logs into visual reports, helping you see your efforts and identify trends over time.</li>
         </ol>
         
-        {/* <hr /> */}
 
         <h2>When?</h2>
         <ul>

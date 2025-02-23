@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
       primary: {
-        main: '#C7BEBE', // Change this to your desired color
+        main: '#C7BEBE', 
       },
     },
   });
@@ -49,12 +49,6 @@ export default function EditLogModal({ isOpen, onClose, log, setRefresh }) {
     };
 
     if (!isOpen) return null;
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleUpdate();
-        }
-    };
 
     return (
         <ThemeProvider theme={theme}>

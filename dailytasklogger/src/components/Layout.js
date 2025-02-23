@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./Header";
 import Script from "next/script";
-// import styles from "../styles/Layout.module.css";
 
 export default function Layout({ children }) {
   return (

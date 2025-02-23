@@ -36,7 +36,6 @@ export default function LogSummary({ refresh, setRefresh }) {
         fetchDailySummary();
     }, [refresh]);
 
-    // function delete daily log
     const deleteLog = async (id) => {
         const { error } = await supabase.from('logs').delete().eq('id', id);
         if (error) {

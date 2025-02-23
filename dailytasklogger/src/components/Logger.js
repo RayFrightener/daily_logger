@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
       primary: {
-        main: '#C7BEBE', // Change this to your desired color
+        main: '#C7BEBE', 
       },
     },
   });
@@ -54,14 +54,8 @@ export default function Logger( { refresh, setRefresh }) {
             console.log('Error logging:', error);
             throw error;
         } else {
-            setLog(''); // clear the input field after saving the log
+            setLog(''); 
             setRefresh(prev => !prev);
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            saveLog();
         }
     };
 
