@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Styles from '@/styles/StackedBarChart.module.css';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import supabase from '@/utils/supabase/client';
 
 import {
@@ -13,6 +15,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 ChartJS.register(
   CategoryScale,
@@ -54,8 +59,9 @@ export function StackedBarChart({ refresh }) {
     
     useEffect(() => {
         const fetchWeeklySummary = async () => {
-            const startOfWeek = dayjs().startOf('week').add(1, 'day').format('YYYY-MM-DD'); // Monday
-            const endOfWeek = dayjs().startOf('week').add(7, 'day').format('YYYY-MM-DD'); // Sunday            
+            const now = dayjs().tz('America/New_York');
+            const startOfWeek = now.startOf('week', { weekStart: 1 }).format('YYYY-MM-DD'); // Explicit Monday start
+            const endOfWeek = now.startOf('week', { weekStart: 1 }).add(6, 'day').format('YYYY-MM-DD'); // Sunday
 
             const { data, error } = await supabase
             .from('logs')
