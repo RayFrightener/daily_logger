@@ -9,6 +9,7 @@ import styles from "../styles/index.module.css";
 export default function Home() {
   const router = useRouter();
 
+  
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
