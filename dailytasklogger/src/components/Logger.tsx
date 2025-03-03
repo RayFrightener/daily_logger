@@ -60,7 +60,7 @@ const Logger: React.FC<LoggerProps> = ( { refresh, setRefresh }) => {
             throw error;
         } else {
             setLog(''); 
-            setRefresh(prev => !prev);
+            setRefresh(!refresh);
         }
     };
 
