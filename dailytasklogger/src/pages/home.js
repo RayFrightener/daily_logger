@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../utils/supabase/client";
-import GoalsList from "@/components/GoalsList";
 import Styles from "@/styles/home.module.css";
+
+//components
 import AddGoalModal from "@/components/AddGoalModal";
-import Logger from "@/components/Logger"; // Placeholder for Logger component
-import Charts from "@/components/charts/Charts"; // Placeholder for Chart component
-import LogSummary from "@/components/LogSummary"; // Placeholder for DailySummary component
+import GoalsList from "@/components/GoalsList";
+import Logger from "@/components/Logger"; 
+import Charts from "@/components/charts/Charts"; 
+import LogSummary from "@/components/LogSummary"; 
 import FeedBackModal from "@/components/FeedbackModal";
 import Footer from "@/components/Footer";
 
@@ -52,7 +54,6 @@ export default function Home() {
       setIsFeedbackModalOpen(false);
     }
   }; 
-
 
   return (
     <div className={Styles.page}>

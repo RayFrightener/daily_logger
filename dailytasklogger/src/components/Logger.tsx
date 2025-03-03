@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import supabase from "@/utils/supabase/client";
 import Styles from "@/styles/Logger.module.css";
 import TimePickerComponent from "@/components/TimePickerComponent";
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -13,14 +13,19 @@ const theme = createTheme({
     },
   });
 
-export default function Logger( { refresh, setRefresh }) {
-    const [log, setLog] = useState('');
-    const [goals, setGoals] = useState([]);
-    const [selectedGoal, setSelectedGoal] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [startTime, setStartTime] = useState(dayjs());
-    const [endTime, setEndTime] = useState(dayjs());   
-    const inputRef = useRef(null);
+interface LoggerProps {
+    refresh: boolean;
+    setRefresh: (refresh: boolean) => void;
+}
+
+const Logger: React.FC<LoggerProps> = ( { refresh, setRefresh }) => {
+    const [log, setLog] = useState<string>('');
+    const [goals, setGoals] = useState<{ id: string; name: string }[]>([]);
+    const [selectedGoal, setSelectedGoal] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [startTime, setStartTime] = useState<Dayjs>(dayjs());
+    const [endTime, setEndTime] = useState<Dayjs>(dayjs());   
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const fetchGoals = async () => {
@@ -59,7 +64,7 @@ export default function Logger( { refresh, setRefresh }) {
         }
     };
 
-    const handleSelectChange = (e) => {
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedGoal(e.target.value);
         if (inputRef.current) {
             inputRef.current.focus();
@@ -89,4 +94,6 @@ export default function Logger( { refresh, setRefresh }) {
             </div>
         </ThemeProvider>
     );
-}
+};
+
+export default Logger;

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import supabase from "@/utils/supabase/client";
-import LandingPageContent from "../components/LandingPageContent";
-import ImageSection from "../components/ImageSection";
 import styles from "../styles/index.module.css";
 
-export default function Home() {
-  const router = useRouter();
+//components
+import LandingPageContent from "../components/LandingPageContent";
+import ImageSection from "../components/ImageSection";
 
+const Home: React.FC = () => {
+  const router = useRouter();
   
   useEffect(() => {
     const checkUser = async () => {
@@ -37,4 +38,6 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+export default Home;

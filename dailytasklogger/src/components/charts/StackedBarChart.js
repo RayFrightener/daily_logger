@@ -58,35 +58,45 @@ export function StackedBarChart({ refresh }) {
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
     
     useEffect(() => {
-        const fetchWeeklySummary = async () => {
-            const now = dayjs().tz('America/New_York');
-            const startOfWeek = now.startOf('week', { weekStart: 1 }).format('YYYY-MM-DD'); // Explicit Monday start
-            const endOfWeek = now.startOf('week', { weekStart: 1 }).add(6, 'day').format('YYYY-MM-DD'); // Sunday
+      const fetchWeeklySummary = async () => {
+          const now = dayjs().tz('America/New_York');
+  
+          // Get the most recent Monday (start of week)
+          let startOfWeek = now.startOf('week').add(1, 'day').startOf('day'); // Monday 00:00
+          let endOfWeek = startOfWeek.add(6, 'day').endOf('day'); // Sunday 23:59
+  
+          // Ensure Sunday night still shows the previous week's logs
+          if (now.day() === 0 && now.hour() >= 0) {
+              startOfWeek = now.subtract(1, 'week').startOf('week').add(1, 'day').startOf('day'); // Previous Monday 00:00
+              endOfWeek = startOfWeek.add(6, 'day').endOf('day'); // Previous Sunday 23:59
+          }
+  
+          console.log("Fetching logs from:", startOfWeek.format(), "to", endOfWeek.format());
+  
+          const { data, error } = await supabase
+              .from('logs')
+              .select(`
+                  id,
+                  goal_id,
+                  start_time,
+                  end_time,
+                  log_date,
+                  goals (name)
+              `)
+              .gte('log_date', startOfWeek.format('YYYY-MM-DD'))
+              .lte('log_date', endOfWeek.format('YYYY-MM-DD'));
+  
+          if (error) {
+              console.log('Error getting weekly summary', error);
+          } else {
+              setWeeklyLogs(data || []);
+          }
+      };
+  
+      fetchWeeklySummary();
+  }, [refresh]);
+  
 
-            const { data, error } = await supabase
-            .from('logs')
-            .select(`
-              id,
-              goal_id,
-              start_time,
-              end_time,
-              log_date,
-              goals (
-                name
-              )
-            `)
-            .gte('log_date', startOfWeek)
-            .lte('log_date', endOfWeek);
-
-            if (error) {
-                console.log('Error getting weekly summary', error);
-            } else {
-                setWeeklyLogs(data || []);
-            }
-        };
-
-    fetchWeeklySummary();
-    }, [refresh]);
     useEffect(() => {
         if (weeklyLogs.length > 0) {
             const aggregatedLogs = {};
